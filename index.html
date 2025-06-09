@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phát nhạc khi nhấn vào trang</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #no {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <!-- Âm thanh nền -->
+  <audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/u4yicn.mp3" type="audio/mpeg" />
+    Trình duyệt không hỗ trợ phát âm thanh.
+  </audio>
+
+  <!-- Giao diện -->
+  <div class="boxheart">
+    <div class="heart"><h1>Em nhấn vào đây đi</h1></div>
+    <div class="beat"></div>
+  </div>
+  <div class="boxchoose">
+    <h2>LÀM NGƯỜI YÊU ANH NHA</h2>
+    <div class="listbutton">
+      <button id="no">KHÔNG NHA M</button>
+      <button id="yes">EM ĐỒNG Ý</button>
+    </div>
+  </div>
+  <div class="popup">
+    <div class="inner">
+      <h3>Anh cũng yêu em</h3>
+      <img src="love.gif" alt="" />
+      <p>Tối anh qua đón đi uống <span>NƯỚC MÍA</span> nhé bấy bi</p>
+    </div>
+  </div>
+
+  <script>
+    const audio = document.getElementById("bgMusic");
+    let hasPlayed = false;
+
+    // Phát nhạc khi click bất kỳ đâu
+    document.addEventListener("click", () => {
+      if (!hasPlayed) {
+        audio.play().catch((e) => console.log("Lỗi phát nhạc:", e));
+        hasPlayed = true;
+      }
+    });
+
+    // Các xử lý còn lại
+    const noBtn = document.querySelector("#no");
+    const yesBtn = document.querySelector("#yes");
+    const boxheart = document.querySelector(".boxheart");
+    const boxchoose = document.querySelector(".boxchoose");
+    const popup = document.querySelector(".popup");
+
+    boxheart.addEventListener("click", function () {
+      boxheart.classList.add("active");
+      boxchoose.classList.add("active");
+    });
+
+    yesBtn.addEventListener("click", function () {
+      popup.classList.add("active");
+    });
+
+    noBtn.addEventListener("mouseenter", () => {
+      const top = Math.floor(Math.random() * window.innerHeight);
+      const left = Math.floor(Math.random() * window.innerWidth);
+      noBtn.style.top = `${top}px`;
+      noBtn.style.left = `${left}px`;
+    });
+  </script>
+</body>
+</html>
